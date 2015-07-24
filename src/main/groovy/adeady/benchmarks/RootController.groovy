@@ -1,4 +1,6 @@
 package adeady.benchmarks
+
+import adeady.benchmarks.user.User
 import com.wordnik.swagger.annotations.Api
 import org.springframework.http.MediaType
 import org.springframework.http.ResponseEntity

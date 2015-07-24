@@ -1,5 +1,6 @@
 package adeady.benchmarks
 
+import adeady.benchmarks.user.User
 import groovy.util.logging.Log
 import org.springframework.boot.SpringApplication
 import org.springframework.boot.autoconfigure.SpringBootApplication

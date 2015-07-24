@@ -1,6 +1,5 @@
 package adeady.benchmarks.user
 
-import adeady.benchmarks.User
 import com.wordnik.swagger.annotations.Api
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
@@ -16,20 +15,16 @@ class UserController {
 
         User user = new User(nickname: command.name).save(failOnError: true)
 
-        def representation = new UserRepresentation(name:user.nickname)
-
-        def temp = ResponseEntity.status(HttpStatus.CREATED).body(representation)
-
-        temp
+        ResponseEntity.status(HttpStatus.CREATED).body(user.resource)
 
     }
 
     @RequestMapping(method=RequestMethod.GET)
     ResponseEntity list() {
 
-        def representation = User.findAll().collect { new UserRepresentation(name:it.nickname)}
+        List reps = User.findAll()*.resource
 
-        ResponseEntity.ok(representation)
+        ResponseEntity.ok(reps)
     }
 
     @RequestMapping(value="/{id}", method=RequestMethod.GET)
@@ -37,9 +32,8 @@ class UserController {
 
         User user = User.get(id.toInteger())
 
-        def representation =  new UserRepresentation(name:user.nickname)
-
-        ResponseEntity.ok(representation)
+        ResponseEntity.ok(user.resource)
     }
+
 
 }

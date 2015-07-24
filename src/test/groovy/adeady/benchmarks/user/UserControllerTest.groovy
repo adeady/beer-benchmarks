@@ -1,7 +1,6 @@
 package adeady.benchmarks.user
 
 import adeady.benchmarks.Application
-import adeady.benchmarks.User
 import groovy.json.JsonSlurper
 import org.springframework.boot.test.SpringApplicationContextLoader
 import org.springframework.test.context.ContextConfiguration
@@ -54,6 +53,7 @@ class UserControllerTest extends Specification {
 
         then:
         content.name == name
+        content.links
 
         cleanup:
         def user  = User.findByNickname(name)
@@ -89,7 +89,6 @@ class UserControllerTest extends Specification {
     def "get a user"() {
         User user = new User(nickname: "Achilles").save(failOnError: true)
 
-        println user
         when:
         def response = mockMvc.perform(get("/users/$user.id")
                 .header("Content-Type", "application/json")
@@ -105,6 +104,7 @@ class UserControllerTest extends Specification {
         then:
         content
         content.name == "Achilles"
+        content.links
 
         cleanup:
         User.deleteAll(user)
