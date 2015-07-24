@@ -16,11 +16,11 @@ class RootController {
     @RequestMapping(method=RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     ResponseEntity get(HttpServletRequest request) {
 
-        List<FirstEntity> all = FirstEntity.findAll()
+        List<User> all = User.findAll()
 
         println all
 
-        ResponseEntity.ok(all.collect{[name:it.name, description:it.description]})
+        ResponseEntity.ok(all.collect{[name:it.nickname]})
     }
 
 }

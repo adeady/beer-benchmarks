@@ -5,9 +5,8 @@ import groovy.transform.EqualsAndHashCode
 
 @Entity
 @EqualsAndHashCode
-class FirstEntity {
+class User {
 
-    String name
-    String description
+    String nickname
 
 }

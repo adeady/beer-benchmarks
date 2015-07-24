@@ -13,7 +13,7 @@ public class Application extends SpringBootServletInitializer {
     public static void main(String[] args) {
         log.info "starting Spring Boot app..."
         SpringApplication.run(Application.class, args)
-        FirstEntity bootStrap = new FirstEntity(name: "foo", description: "bar")
+        User bootStrap = new User(nickname: "adeady")
         bootStrap.save()
     }
 }
