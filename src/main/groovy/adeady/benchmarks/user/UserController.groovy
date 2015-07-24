@@ -3,13 +3,8 @@ package adeady.benchmarks.user
 import adeady.benchmarks.User
 import com.wordnik.swagger.annotations.Api
 import org.springframework.http.HttpStatus
-import org.springframework.http.MediaType
 import org.springframework.http.ResponseEntity
-import org.springframework.web.bind.annotation.RequestBody
-import org.springframework.web.bind.annotation.RequestMapping
-import org.springframework.web.bind.annotation.RequestMethod
-import org.springframework.web.bind.annotation.RestController
-
+import org.springframework.web.bind.annotation.*
 
 @RestController
 @RequestMapping(value="/users")
@@ -32,10 +27,19 @@ class UserController {
     @RequestMapping(method=RequestMethod.GET)
     ResponseEntity list() {
 
-        def representation = User.findAll().collect { new UserRepresentation(user:it)}
+        def representation = User.findAll().collect { new UserRepresentation(name:it.nickname)}
 
-        new ResponseEntity(representation, HttpStatus.CREATED)
+        ResponseEntity.ok(representation)
+    }
 
+    @RequestMapping(value="/{id}", method=RequestMethod.GET)
+    ResponseEntity list(@PathVariable String id) {
+
+        User user = User.get(id.toInteger())
+
+        def representation =  new UserRepresentation(name:user.nickname)
+
+        ResponseEntity.ok(representation)
     }
 
 }
