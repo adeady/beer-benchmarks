@@ -52,5 +52,17 @@ dependencies {
     providedRuntime "org.springframework.boot:spring-boot-starter-tomcat"
 }
 
-task stage(dependsOn: 'war') {
+task stage(type: Copy, dependsOn: [clean, build, jar]) {
+    from jar.archivePath
+    into project.rootDir
+    rename {
+        'beer-benchmarks.jar'
+    }
+}
+
+stage.mustRunAfter(clean)
+stage.mustRunAfter(jar)
+
+clean << {
+    project.file('beer-benchmarks.jar').delete()
 }
