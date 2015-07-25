@@ -31,6 +31,7 @@ public class SwaggerConfig {
     private static Predicate<String> paths() {
         return or(
                 regex("/users.*"),
+                regex("/goals.*"),
                 regex("")
         );    }
 

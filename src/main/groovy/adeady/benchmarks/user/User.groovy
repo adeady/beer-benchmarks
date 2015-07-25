@@ -1,5 +1,6 @@
 package adeady.benchmarks.user
 
+import adeady.benchmarks.goal.Goal
 import grails.persistence.Entity
 import groovy.transform.EqualsAndHashCode
 import org.springframework.hateoas.Link
@@ -13,6 +14,9 @@ class User {
 
     String nickname
 
+    static hasMany = [
+            goals: Goal
+    ]
     Resource<UserRepresentation> getResource() {
         Link selfLink = linkTo(UserController).slash(id).withSelfRel();
 
