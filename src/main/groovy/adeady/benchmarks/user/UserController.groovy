@@ -1,6 +1,7 @@
 package adeady.benchmarks.user
 
 import com.wordnik.swagger.annotations.Api
+import org.springframework.hateoas.Resource
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
@@ -11,7 +12,7 @@ import org.springframework.web.bind.annotation.*
 class UserController {
 
     @RequestMapping(method=RequestMethod.POST)
-    ResponseEntity get(@RequestBody UserCommand command) {
+    ResponseEntity<Resource<UserRepresentation>> get(@RequestBody UserCommand command) {
 
         User user = new User(nickname: command.name).save(failOnError: true)
 
@@ -20,7 +21,7 @@ class UserController {
     }
 
     @RequestMapping(method=RequestMethod.GET)
-    ResponseEntity list() {
+    ResponseEntity<List<Resource<UserRepresentation>>> list() {
 
         List reps = User.findAll()*.resource
 
@@ -28,7 +29,7 @@ class UserController {
     }
 
     @RequestMapping(value="/{id}", method=RequestMethod.GET)
-    ResponseEntity list(@PathVariable String id) {
+    ResponseEntity<Resource<UserRepresentation>> list(@PathVariable String id) {
 
         User user = User.get(id.toInteger())
 

@@ -66,3 +66,12 @@ stage.mustRunAfter(jar)
 clean << {
     project.file('beer-benchmarks.jar').delete()
 }
+
+//set profile to test.
+tasks.withType(Test) {
+    jvmArgs = ["-Dspring.profiles.active=test"]
+    testLogging {
+        exceptionFormat "full"
+        showStandardStreams false
+    }
+}
