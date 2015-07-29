@@ -9,7 +9,7 @@ import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
 
 @RestController
-@RequestMapping(value="/goals")
+@RequestMapping(value="/api/goals")
 @Api(value = "goals")
 class GoalController {
 
