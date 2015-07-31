@@ -20,7 +20,7 @@ class User {
     Resource<UserRepresentation> getResource() {
         Link selfLink = linkTo(UserController).slash(id).withSelfRel();
 
-        def representation = new UserRepresentation(name:nickname)
+        def representation = new UserRepresentation(name:nickname, id: id)
 
         new Resource<UserRepresentation>(representation, selfLink)
     }

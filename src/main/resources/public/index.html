@@ -15,11 +15,8 @@
 <body>
 <div ng-controller="UsersController">
     Names
-    <ul>
-        <li ng-repeat="x in names">
-            {{ x.name }}
-        </li>
-    </ul>
+
+    <button type="button" id="addUser" class="btn btn-success" ng-click="addUser()">Add User</button>
 
     <div id="grid1" ui-grid="{ data: names }" class="grid"></div>
 </div>

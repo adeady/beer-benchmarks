@@ -8,4 +8,5 @@ import groovy.transform.ToString
 class UserRepresentation {
 
     String name
+    String id
 }
