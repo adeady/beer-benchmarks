@@ -1,5 +1,5 @@
-var myAppModule = angular.module('myApp', ['ui.bootstrap','ui.grid'])
-    .controller('UsersController', function($scope, $http) {
+var myAppModule = angular.module('myApp', ['ui.bootstrap','ui.grid', "ui.bootstrap.modal"])
+    .controller('UsersController', function($scope, $http, $modal, $log) {
         $http.get('/api/users').success(function(data) {
             $scope.names = data;
 
@@ -14,4 +14,44 @@ var myAppModule = angular.module('myApp', ['ui.bootstrap','ui.grid'])
                     console.log(data)
                 });
         };
+        $scope.items = ['item1', 'item2', 'item3'];
+
+        $scope.open = function () {
+
+            var modalInstance = $modal.open({
+                animation: true,
+                templateUrl: 'myModalContent.html',
+                controller: ModalInstanceCtrl,
+                size: '',
+                resolve: {
+                    items: function () {
+                        return $scope.items;
+                    }
+                }
+            });
+
+            modalInstance.result.then(function (selectedItem) {
+                $scope.selected = selectedItem;
+            }, function () {
+                $log.info('Modal dismissed at: ' + new Date());
+            });
+        };
+
     });
+
+var bob = angular.module('foobar', [])
+    .controller('ModalInstanceCtrl', function ($scope, $modalInstance, items) {
+
+    $scope.items = items;
+    $scope.selected = {
+        item: $scope.items[0]
+    };
+
+    $scope.ok = function () {
+        $modalInstance.close($scope.selected.item);
+    };
+
+    $scope.cancel = function () {
+        $modalInstance.dismiss('cancel');
+    };
+});
